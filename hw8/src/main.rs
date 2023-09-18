@@ -225,7 +225,7 @@ fn convert_to_cartesian_html() {
     table.push_str("<!DOCTYPE html>
 <html>
     <head>
-        <title>Cartesian to Polar</title>
+        <title>Polar to Cartesian</title>
         <style> table, th, td {
             border: 1px solid #000000;
             text-align: center;
@@ -233,18 +233,18 @@ fn convert_to_cartesian_html() {
             border-collapse: collapse; 
             }
         </style>
-        <h1>Cartesian to Polar</h1>
+        <h1>Polar to Cartesian</h1>
     </head>
     <body>
         <table>
             <thead>
                 <tr>
-                    <th>Cartesian</th>
                     <th>Polar</th>
+                    <th>Cartesian</th>
                 </tr>
             </thead>
             <tbody>");
-            
+
     let input_name: String = args[1].parse().unwrap();   
 
     let point = load_points_polar(File::open(input_name).unwrap());
