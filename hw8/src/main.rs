@@ -2,11 +2,10 @@ use csv::{ReaderBuilder, Writer, Trim};
 use std::io::Read;
 use std::io::Write;
 use std::fs::File;
-use std::io::{stdin, stdout};
 fn main() {
     // convert_to_polar();
-    // convert_to_car();
-    convert_to_polar_html();
+    convert_to_car();
+    // convert_to_polar_html();
     // convert_to_cartesian_html();
 }
 #[derive(Debug, PartialEq)]
@@ -134,40 +133,19 @@ fn save_points_car<W: Write>(writer: W, pt_list: Vec<Point>) {
 
 #[allow(dead_code)]
 fn convert_to_polar() {
-    let args: Vec<_> = std::env::args().collect();
-    if args.len() == 1{
-        let point = load_points_car(stdin());
-        let to_polar = to_polar(point);
-        let result = save_points_polar(stdout(), to_polar);
-        result
-    }else {
-    let input_name: String = args[1].parse().unwrap();
-    let output_name: String = args[2].parse().unwrap();    
-
-    let point = load_points_car(File::open(input_name).unwrap());
+    let point = load_points_car(File::open("input.csv").unwrap());
     let to_polar = to_polar(point);
-    let result = save_points_polar(File::create(output_name).unwrap(), to_polar);
+    let result = save_points_polar(File::create("output.csv").unwrap(), to_polar);
     result
-    }
 }
 
 #[allow(dead_code)]
 fn convert_to_car() {
-    let args: Vec<_> = std::env::args().collect();
-    if args.len() == 1{
-        let point = load_points_polar(stdin());
-        let to_car = to_cartesian(point);
-        let result = save_points_car(stdout(), to_car);
-        result
-    }else {
-    let input_name: String = args[1].parse().unwrap();
-    let output_name: String = args[2].parse().unwrap();    
-
-    let point = load_points_polar(File::open(input_name).unwrap());
+    let point = load_points_polar(File::open("input2.csv").unwrap());
     let to_car = to_cartesian(point);
-    let result = save_points_car(File::create(output_name).unwrap(), to_car);
+    let result = save_points_car(File::create("output2.csv").unwrap(), to_car);
     result
-    }
+
 }
 
 #[allow(dead_code)]
